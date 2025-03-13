@@ -28,7 +28,7 @@ lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
 
 for i in range(params.nodeCount):
-    node = rspec.RawPC("backend{}".format(i))
+    node = request.RawPC("backend{}".format(i))
     node.hardware_type = params.nodeType
     node.disk_image = params.osImage
     node.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
