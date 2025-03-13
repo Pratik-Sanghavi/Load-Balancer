@@ -1,3 +1,4 @@
+# THIS FILE MUST BE NAMED profile.py for cloudlab to recognize it
 import geni.portal as portal
 import geni.rspec.pg as rspec
 
