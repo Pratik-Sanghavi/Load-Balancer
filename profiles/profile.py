@@ -9,7 +9,6 @@ pc.defineParameter("nodeType", "Hardware Type for backend nodes", portal.Paramet
 pc.defineParameter("osImage", "Disk Image for the VMs", portal.ParameterType.IMAGE, "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD")
 pc.defineParameter("lbDocker", "Custom Docker Image for the Load Balancer", portal.ParameterType.STRING, "nginx:latest") # the first load balancer we want to benchmark
 pc.defineParameter("bkDocker", "Custom Docker Image for the Backend Nodes", portal.ParameterType.STRING, "hashicorp/http-echo:latest") # Just a hello world image since we aren't testing the backend
-pc.defineParameter("nginxConfig", "Custom Nginx Configuration", portal.ParameterType.STRING, "../nginx_config/nginx.conf")
 
 params = pc.bindParameters()
 
@@ -24,7 +23,7 @@ load_balancer.disk_image = params.osImage
 
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
 
-load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 -v {}:/etc/nginx/nginx.conf {}".format(params.nginxConfig, params.lbDocker)))
+load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 {}".format(params.lbDocker)))
 
 lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
