@@ -24,8 +24,6 @@ load_balancer.disk_image = params.osImage
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer {}".format(params.lbDocker)))
 
-request.addResource(load_balancer)
-
 lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
 
@@ -36,7 +34,6 @@ for i in range(params.nodeCount):
     node.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
     node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} {}".format(i, params.bkDocker)))
     
-    request.addResource(node)
     iface = node.addInterface("if-back{}".format(i))
     lan.addInterface(iface)
     
