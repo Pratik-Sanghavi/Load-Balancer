@@ -24,7 +24,7 @@ load_balancer.disk_image = params.osImage
 
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
 
-load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 {}".format(params.nginxConfig, params.lbDocker)))
+load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 -v {}:/etc/nginx/nginx.conf {}".format(params.nginxConfig, params.lbDocker)))
 
 lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
@@ -34,7 +34,7 @@ for i in range(params.nodeCount):
     node.hardware_type = params.nodeType
     node.disk_image = params.osImage
     node.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
-    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:80 {}".format(i, params.bkDocker)))
+    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:80 -listen=:80 -text=\"Welcome from backend {}\" {}".format(i, i, params.bkDocker)))
     
     iface = node.addInterface("if-back{}".format(i))
     lan.addInterface(iface)
