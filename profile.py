@@ -41,4 +41,4 @@ for i in range(params.nodeCount):
     lan.addInterface(iface)
     
 request.addResource(lan)
-rspec.printRequestRSpec(request)
+pc.printRequestRSpec(request)
