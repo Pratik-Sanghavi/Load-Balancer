@@ -24,7 +24,7 @@ load_balancer.disk_image = params.osImage
 
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
 
-load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 -v {}:/etc/nginx/nginx.conf {}".format(params.nginxConfig, params.lbDocker)))
+load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name loadBalancer -p 80:80 {}".format(params.nginxConfig, params.lbDocker)))
 
 lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
