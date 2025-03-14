@@ -33,7 +33,7 @@ for i in range(params.nodeCount):
     node.hardware_type = params.nodeType
     node.disk_image = params.osImage
     node.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
-    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:5678 -text=\"Welcome from backend {}\" {}".format(i, i, params.bkDocker)))
+    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:5678 {} -text=\"Welcome from backend {}\"".format(i, params.bkDocker, i)))
     
     iface = node.addInterface("if-back{}".format(i))
     lan.addInterface(iface)
