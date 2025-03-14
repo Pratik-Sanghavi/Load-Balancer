@@ -29,11 +29,12 @@ lb_iface = load_balancer.addInterface("if-lb")
 lan.addInterface(lb_iface)
 
 for i in range(params.nodeCount):
+    text = "Welcome from backend {}".format(i)
     node = request.RawPC("backend{}".format(i))
     node.hardware_type = params.nodeType
     node.disk_image = params.osImage
     node.addService(rspec.Execute(shell="sh", command="sudo apt-get update && sudo apt-get install -y docker.io"))
-    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:5678 {} -text=\"Welcome from backend {}\"".format(i, params.bkDocker, i)))
+    node.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name backend{} -p 8080:5678 {} -text={}".format(i, params.bkDocker, text)))
     
     iface = node.addInterface("if-back{}".format(i))
     lan.addInterface(iface)
