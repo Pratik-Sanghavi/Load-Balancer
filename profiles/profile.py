@@ -27,7 +27,7 @@ pc.defineParameter("nodeCount", "Number of backend nodes", portal.ParameterType.
 pc.defineParameter("nodeType", "Hardware Type for backend nodes", portal.ParameterType.NODETYPE, "c220g1") # NIC available for experimental use for this node type
 pc.defineParameter("osImage", "Disk Image for the VMs", portal.ParameterType.IMAGE, "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD")
 pc.defineParameter("nginxDocker", "Custom Docker Image for the Nginx Load Balancer", portal.ParameterType.STRING, "nginx:latest") # the first load balancer we want to benchmark
-pc.defineParameter("haproxyDocker", "Custom Docker Image for the Load Balancer", portal.ParameterType.STRING, "haproxytech/haproxy-alpine:latest")
+pc.defineParameter("haproxyDocker", "Custom Docker Image for the Haproxy Load Balancer", portal.ParameterType.STRING, "haproxytech/haproxy-alpine:latest")
 pc.defineParameter("bkDocker", "Custom Docker Image for the Backend Nodes", portal.ParameterType.STRING, "hashicorp/http-echo:latest") # Just a hello world image since we aren't testing the backend
 
 params = pc.bindParameters()
