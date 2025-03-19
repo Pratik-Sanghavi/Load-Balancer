@@ -1,0 +1,11 @@
+scrape_configs:
+  - job_name: 'nginx-metrics'
+    scrape_interval: 15s
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['<YOUR_MACHINE_IP>:9113']
+  - job_name: 'haproxy-metrics'
+    scrape_interval: 15s
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['<YOUR_MACHINE_IP>:8405']
