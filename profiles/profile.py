@@ -1,4 +1,23 @@
 # THIS FILE MUST BE NAMED profile.py for cloudlab to recognize it
+"""
+Creates a profile with a load balancer and backend nodes
+The profile also installs docker on all the nodes and runs a custom docker image on the load balancer and backend nodes
+Currently we auto start the Nginx and HAProxy load balancers
+The backend nodes run a simple hello world docker image by Hashicorp
+
+Instructions:
+1. Go to https://www.cloudlab.us/
+2. Click on "Create Slice"
+3. Click on "Add a Profile"
+4. Click on "Import Profile"
+5. Copy the contents of this file and paste it in the text box
+6. Click on "Create Profile"
+7. Click on "Instantiate" to create a new experiment
+8. Wait for the experiment to start
+
+And you're done! You should now have a load balancer and backend nodes running in your experiment
+"""
+
 import geni.portal as portal
 import geni.rspec.pg as rspec
 
