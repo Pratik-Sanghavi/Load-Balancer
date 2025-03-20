@@ -52,7 +52,7 @@ load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d -
 # HAProxy Load Balancer
 load_balancer.addService(rspec.Execute(shell="sh", command="mkdir -p /users/prsangh/logs/haproxy"))
 load_balancer.addService(rspec.Execute(shell="sh", command="mkdir -p /users/prsangh/haproxy_config"))
-load_balancer.addService(rspec.Execute(shell="sh", command="wget -O /users/prsangh/haproxy_config/haproxy.cfg https://raw.githubusercontent.com/Pratik-Sanghavi/Load-Balancer/main/nginx_config/haproxy.cfg"))
+load_balancer.addService(rspec.Execute(shell="sh", command="wget -O /users/prsangh/haproxy_config/haproxy.cfg https://raw.githubusercontent.com/Pratik-Sanghavi/Load-Balancer/main/haproxy_config/haproxy.cfg"))
 load_balancer.addService(rspec.Execute(shell="sh", command="sudo docker run -d --name haproxy-lb -p 81:80 -p 8404:8404 -v /users/prsangh/logs/haproxy:/usr/local/etc/haproxy -v /users/prsangh/haproxy_config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro {}".format(params.haproxyDocker)))
 
 lb_iface = load_balancer.addInterface("if-lb")
